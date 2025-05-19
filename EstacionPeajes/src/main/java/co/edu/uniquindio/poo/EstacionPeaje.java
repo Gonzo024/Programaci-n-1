@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 
 public class EstacionPeaje {
@@ -44,6 +45,10 @@ public class EstacionPeaje {
         return Ubicacion;
     }
 
+    public LinkedList<Cobrador> getListCobradores() {
+        return listCobradores;
+    }
+
     public void setUbicacion(String ubicacion) {
         Ubicacion = ubicacion;
     }
@@ -72,9 +77,23 @@ public class EstacionPeaje {
         this.totalRecaudado = totalRecaudado;
     }
 
+    public LinkedList<Vehiculo> getListVehiculosRegistrados() {
+        return listVehiculosRegistrados;
+    }
+
+    public void setListVehiculosRegistrados(LinkedList<Vehiculo> listVehiculosRegistrados) {
+        this.listVehiculosRegistrados = listVehiculosRegistrados;
+    }
+
+    public void setListCobradores(LinkedList<Cobrador> listCobradores) {
+        this.listCobradores = listCobradores;
+    }
+
     // total de peajes
 
 //asignar vehiculo al conductor
+
+    //metodo 1
     public boolean asignarVehiculoAConductor (String idConductor, Vehiculo vehiculo) {
         boolean flag = false;
         Conductor conductorEncontrado = null;
@@ -91,16 +110,20 @@ public class EstacionPeaje {
         return flag;
     }
     //vehiculos que llegaron al peaje
+
+    // metodo 2
     public void procesarPasoVehiculo(Vehiculo vehiculo) {
         double valor = vehiculo.calularValorPeaje();
         totalRecaudado += valor;
         listVehiculosRegistrados.add(vehiculo);
     }
 //calculo detallado de cada peaje y total acomulado
+
+    //meotod 3
     public void imprimirResumenPeaje() {
         System.out.println("Resumen de vehículos en el peaje:");
-        for (Vehiculo v : listVehiculosRegistrados) {
-            System.out.println(v.getPlaca() + " - Valor peaje: $" + v.calularValorPeaje());
+        for (Vehiculo vehiculo : listVehiculosRegistrados) {
+            System.out.println(vehiculo.getPlaca() + " - Valor peaje: $" + vehiculo.calularValorPeaje());
         }
         System.out.println("Total recaudado: $" + totalRecaudado);
     }
@@ -117,6 +140,7 @@ public class EstacionPeaje {
         return null;
     }
 
+    //metodo 4
     public LinkedList<Conductor> obtenerConductoresConCamionPesado() {
         LinkedList<Conductor> resultado = new LinkedList<>();
 
@@ -133,4 +157,5 @@ public class EstacionPeaje {
         }
         return resultado;
     }
+
 }
